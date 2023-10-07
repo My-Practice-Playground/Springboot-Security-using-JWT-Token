@@ -1,7 +1,7 @@
 package com.example.springboot3jwtauth.services;
 
 import com.example.springboot3jwtauth.models.User;
-import com.example.springboot3jwtauth.repositories.UserRepo;
+import com.example.springboot3jwtauth.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepo userRepo;
+    private final UserRepository userRepository;
 
     public UserDetailsService userDetailsService() {
-        return new UserDetails() {
+        return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String email) {
-                return userRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+                return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
             }
         };
     }
@@ -29,7 +29,7 @@ public class UserService {
             newUser.setCreatedAt(LocalDateTime.now());
         }
         newUser.setUpdatedAt(LocalDateTime.now());
-        return userRepo.save(newUser);
+        return userRepository.save(newUser);
     }
 }
 

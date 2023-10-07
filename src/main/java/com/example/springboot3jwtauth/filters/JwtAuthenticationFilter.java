@@ -1,5 +1,6 @@
 package com.example.springboot3jwtauth.filters;
 
+import com.example.springboot3jwtauth.services.JwtService;
 import com.example.springboot3jwtauth.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final JwtSevice jwtSevice;
+    private final JwtService jwtService;
     private final UserService userService;
 
     @Override
@@ -41,10 +42,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         jwt = authHeader.substring(7);
         log.debug("JWT - {}",jwt.toString());
-        userEmail = jwtSevice.extractUserName(jwt);
+        userEmail = jwtService.extractUserName(jwt);
         if(!StringUtils.isEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
-            if(jwtSevice.isTokenValid(jwt,userDetails)){
+            if(jwtService.isTokenValid(jwt,userDetails)){
                 log.debug("User - {}"+userDetails);
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
