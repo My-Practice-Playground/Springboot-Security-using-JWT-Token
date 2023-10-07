@@ -1,5 +1,8 @@
 package com.example.springboot3jwtauth.services;
 
+import com.example.springboot3jwtauth.dto.JwtAuthenticationResponse;
+import com.example.springboot3jwtauth.dto.SignInRequest;
+import com.example.springboot3jwtauth.dto.SignUpRequest;
 import com.example.springboot3jwtauth.models.User;
 import com.example.springboot3jwtauth.repositories.UserRepository;
 import com.example.springboot3jwtauth.util.Role;

@@ -1,6 +1,5 @@
 package com.example.springboot3jwtauth.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignInRequest {
+public class SignUpRequest {
+    String firstName;
+    String lastName;
     String email;
     String password;
 }
