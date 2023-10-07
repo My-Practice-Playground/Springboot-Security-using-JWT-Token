@@ -1,6 +1,6 @@
 package com.example.springboot3jwtauth.config;
 
-import com.example.springboot3jwtauth.filters.JwtAuthFilter;
+import com.example.springboot3jwtauth.filters.JwtAuthenticationFilter;
 import com.example.springboot3jwtauth.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final JwtAuthFilter jwtAuthFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
@@ -52,7 +52,7 @@ public class SecurityConfig {
 
                 )
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
