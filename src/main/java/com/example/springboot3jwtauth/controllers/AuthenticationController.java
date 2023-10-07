@@ -18,6 +18,7 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public JwtAuthenticationResponse signup(@RequestBody SignUpRequest request) {
+        System.out.println("sign up");
         return authenticationService.signup(request);
     }
 

@@ -53,6 +53,7 @@ public class SecurityConfig {
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        System.out.println("SecurityFilterChain");
         return http.build();
     }
 }
